@@ -38,15 +38,12 @@ class Connection
     if ($result === FALSE)
     {
       $error_code = socket_last_error($this->socket);
-      if ($error_code !== SOCKET_EINPROGRESS)
+      if (!in_array($error_code, [SOCKET_EINPROGRESS, SOCKET_EWOULDBLOCK], true))
       {
         throw new SocketException("Error connecting to MySQL server at {$this->address}:{$this->port}", $this->socket);
       }
     }
-    else
-    {
-      $this->connected = TRUE;
-    }
+    $this->connected = TRUE;
   }
 
   function disconnect()

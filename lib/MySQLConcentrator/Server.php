@@ -154,6 +154,7 @@ class Server
             if ($this->mysql_connection == NULL)
             {
               $this->create_mysql_connection();
+              $this->mysql_connection->connect();
             }
             $client_connection = new ClientConnection($this, "client", $socket, TRUE);
 //            $client_connection->log("adding to server connections.\n");

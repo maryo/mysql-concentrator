@@ -411,6 +411,10 @@ class Packet
 
   static function unmarshall_length_coded_binary($binary)
   {
+    if ($binary === '')
+    {
+      return [null, 0];
+    }
     $first_byte = ord($binary{0});
     switch ($first_byte)
     {
